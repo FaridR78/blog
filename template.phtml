@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <link href="styles.css" rel="stylesheet" media="all" type="text/css">
+    <title>mini blog</title>
+    
+</head>
+
+
+<body>
+
+<header>
+
+</header>
+
+<h1>Welcome on this Blog</h1>
+
+<div>
+
+<?php foreach ($posts as $post): ?>
+
+<p class="billet">billet numéro : <?= $post["id"]?>  crée le <?= $post["date_create"] ?> par :<?= $post["author_id"] ?></p>
+<p class="title">Titre: <a href ="post.php?id=<?= $post["id"]?>" class="titre"><?=$post["title"]?></a></p>
+
+<div id='content'>
+<p><?= $post["content"] ?></p>
+</div>
+
+<?php endforeach; ?>
+
+
+
+
+<footer>
+</footer>
+
+</body>
