@@ -11,28 +11,86 @@
 <body>
 
 <header>
-
+<h1>Another PHP Blog </h1>
 </header>
 
-<h1>Welcome on this Blog</h1>
+<div class="main" class="clearfix">
 
-<div>
+		<section class="content">
+			
+			<article>
+			<?php $author_id = new Model_Post(); ?>
 
-<?php foreach ($posts as $post): ?>
+			<?php foreach ($posts as $post): ?>
 
-<p class="billet">billet numéro : <?= $post["id"]?>  crée le <?= $post["date_create"] ?> par :<?= $post["author_id"] ?></p>
-<p class="title">Titre: <a href ="post.php?id=<?= $post["id"]?>" class="titre"><?=$post["title"]?></a></p>
+				<p class="billet">billet numéro : <?= $post["id"]?>  crée le <?= $post["date_create"] ?> 
 
-<div id='content'>
-<p><?= $post["content"] ?></p>
+					<?php $author = $author_id ->getAuthor($post["author_id"]); ?>
+
+					Posted by : <?= $author['firstname'].' '.$author['lastname'] ?></p>
+
+					
+				<p class="title">Titre: <a href ="post.php?id=<?= $post["id"]?>" class="titre"><?=$post["title"]?></a></p>
+
+				<div id='content'>
+						<p><?= $post["content"] ?> ....</p>
+				</div>
+
+			<?php endforeach; ?>
+
+
+
+			</article>
+
+		</section>
+
+		<section class="menu">
+
+			<nav>
+				
+				<h2>Admin aera</h2>
+
+				<?php if(isset($_SESSION["ID"])):?>
+
+				<p><a>Welcome </a><strong><?= $_SESSION["NAME"]; ?></strong></p>
+
+					<?php if(($_SESSION["ISADMIN"])==1):?>
+
+						<p><a href="admin.php">Ajouter une page</a></p>
+					
+					<?php endif;?>
+				
+
+					<p><a href="logout.php">Se deconnecter</a></p>
+
+				<?php else:?>
+
+					<p><a href="login.php">Login</a></p>
+
+				<?php endif;?>
+				
+
+				<h2>Menu</h2>
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+				<h2>Categorie</h2>
+				<h2>Archives</h2>
+				<h2>Search</h2>
+			</nav>
+
+		</section>
+
 </div>
-
-<?php endforeach; ?>
 
 
 
 
 <footer>
+
 </footer>
 
 </body>

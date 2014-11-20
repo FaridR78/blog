@@ -10,7 +10,6 @@ background-color: white;
 
 font-family: verdana;
 font-size: 22px;
-
 color: green;
 
 
@@ -18,8 +17,30 @@ color: green;
 
 
 #content{
-background-color: white;
-border: 25px;
+width: 650px;
+background-color: yellow;
 
+}
 
+.menu{
+	width: 150px;
+	float: left;
+}
+
+.content{
+
+width: 700px;
+float: left;
+
+}
+
+h2{
+
+	font-size: 18px;
+}
+
+li a{
+
+	text-decoration: none;
+	list-style: none;
 }

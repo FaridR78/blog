@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<!-- <link href="normalize.css"  rel="stylesheet" media="all" type="text/css"> -->
+	<link href="styles.css" rel="stylesheet" media="all" type="text/css"> 
+	<title>Write Entry</title>
+	
+	<!--
+
+	<style>
+	p.serif {
+	    font-family: "Times New Roman", Times, serif;
+	}
+
+	p.sansserif {
+	    font-family: Arial, Helvetica, sans-serif;
+	}
+	</style>
+
+	-->
+
+</head>
+
+<header>
+
+
+</header>
+
+<body>
+<h1>Write Entry</h1>
+
+<div class="page">		
+
+	<form name="newcontent" method="post" action="addPost.php">
+
+		<fieldset>
+			<legend>Ajouter un article</legend>			
+
+			<p>
+				<label for="subject-id">Subject</label>
+				<input type="text" name ="subject" id="subject-id">
+			</p>
+
+			<p>
+				<label for="Content">Content</label>
+				<textarea name="content" rows="10" cols="40" id="content" value="content">content</textarea>
+			<P>
+
+<!-- 			<p>
+				<label for="category">Category</label>
+					<select name="category" >
+							<option value="1">...</option>
+							<option value="2">New york</option>
+						    <option value="3">Boston</option>
+						    <option value="4">San diego</option>
+						    <option value="5">Washington</option>
+						    <option value="6">Detroit</option>
+						    <option value="7">Chicago</option>
+					</select>
+			</p> -->
+
+			<p>
+				<input type="submit" name="connexion" value="Publier">
+			</p>
+
+		</fieldset>
+
+	</form>
+</div>

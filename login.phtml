@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <link href="styles.css" rel="stylesheet" media="all" type="text/css">
+    <title>mini blog</title>
+    
+</head>
+
+
+<body>
+
+<header>
+
+<h1>Another PHP Blog </h1>
+
+</header>
+
+
+			<form action="member.php" name="connexion" method="post">
+			
+			<fieldset>
+				
+				<legend>Connexion à l'espace membre :</legend>			
+
+				<p>
+					<label for="nom-id">Nom utilisateur</label>
+					<input type="text" name ="name" id="nom-id">
+				</p>
+				
+				<p>
+					<label for="password-id">Mot de passe : </label>
+					<input type="password" name="pass" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass'])); ?>">
+				</p>
+
+				<p>
+					<input type="submit" name="connexion" value="Connexion">
+				</p>
+
+			</fieldset>
+
+			</form>
+
+
+<footer>
+
+</footer>
+
+</body>

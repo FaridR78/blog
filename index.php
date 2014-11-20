@@ -9,31 +9,13 @@ Pagination (possibilité de voir les 5 articles suivant sur l’url monsite.com/
 
 */
 
-spl_autoload_register("my_autoload");
-
-
-	function my_autoload($class)
-	{
-
-		$filepath = str_replace("_","/", $class);
-
-		$filepath.='.php';
-
-		if (file_exists($filepath)) 
-		{
-   			 require_once($filepath);
-		} 
-		else 
-		{
-  			  echo "Le fichier ".$filepath." n'existe pas.";
-  			  die;
-		}
-		
-	}
+	include 'autoload.php';
 
 	$posted = new Model_Post();
 
 	$posts = $posted ->getLatestPosts(5);
+
+
 	
 	// var_dump($posts);
 
