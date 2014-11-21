@@ -9,7 +9,7 @@ background-color: white;
 .titre{
 
 font-family: verdana;
-font-size: 22px;
+font-size: 20px;
 color: green;
 
 
@@ -18,7 +18,8 @@ color: green;
 
 #content{
 width: 650px;
-background-color: yellow;
+background-color: white;
+color: black;
 
 }
 
@@ -43,4 +44,11 @@ li a{
 
 	text-decoration: none;
 	list-style: none;
+}
+
+.billet {
+	width: 650px;
+	background-color: black;
+	color: white;
+
 }

@@ -33,8 +33,7 @@
 			$posted = new Model_Post();
 
 			$post = $posted ->getPost($_GET["id"]);
-		
-		
+	
 	}
 
 	include "post.phtml";

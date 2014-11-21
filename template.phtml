@@ -33,12 +33,51 @@
 				<p class="title">Titre: <a href ="post.php?id=<?= $post["id"]?>" class="titre"><?=$post["title"]?></a></p>
 
 				<div id='content'>
-						<p><?= $post["content"] ?> ....</p>
+					 <p><?= $post["content"] ?> ....</p>
 				</div>
+
+				<!-- commentaire à gérer -->
+
+				<div id='comment'>
+
+					<?php $nbcomments = $author_id ->gettotalComments($post["id"]); ?>
+
+					<p>Comments [ <?= $nbcomments; ?> ]</p>
+					
+				</div>
+
+
+				<!-- si admin possibilitée de supprimer delPost ou modifier UpdatePost le post -->
+
+				<?php if(isset($_SESSION["ISADMIN"]) && ($_SESSION["ISADMIN"])==1):?>
+
+				
+						<p><a onclick="return confirm('etes vous sur ?')" href="delpost.php?id=<?= $post["id"]?>">Effacer le billet</a>
+						<a href="#">Modifier le billet</a></p>
+
+					
+				<?php endif;?>
+
 
 			<?php endforeach; ?>
 
+			<!-- Pagination des articles par page -->
 
+					<div class="page">
+
+						<?php if($page>1):?>
+
+							<a href="?page=<?= $page-1;?>">Billets précédent </a>
+						
+						<?php endif;?>
+
+						<?php if($page<$nbpage):?>
+		
+							<a href="?page=<?= $page+1;?>">Billets suivant</a>
+
+						<?php endif;?>
+
+					</div>
 
 			</article>
 
@@ -56,12 +95,12 @@
 
 					<?php if(($_SESSION["ISADMIN"])==1):?>
 
-						<p><a href="admin.php">Ajouter une page</a></p>
+						<p><a href="admin.php">Créer un Billet</a></p>
 					
 					<?php endif;?>
 				
 
-					<p><a href="logout.php">Se deconnecter</a></p>
+					<p><a href="logout.php">Se déconnecter</a></p>
 
 				<?php else:?>
 
@@ -71,15 +110,18 @@
 				
 
 				<h2>Menu</h2>
+
 				<ul>
 					<li><a href="#">Home</a></li>
 					<li><a href="#">Blog</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Contact</a></li>
 				</ul>
+
 				<h2>Categorie</h2>
 				<h2>Archives</h2>
 				<h2>Search</h2>
+
 			</nav>
 
 		</section>

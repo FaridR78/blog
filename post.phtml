@@ -32,8 +32,30 @@
 				<p class="title">Titre: <a href ="post.php?id=<?= $post["id"]?>" class="titre"><?=$post["title"]?></a></p>
 
 				<div id='content'>
-						<p><?= $post["content"] ?> ....</p>
+						<p><?= $post["content"] ?></p>
 				</div>
+
+				<!-- commentaire à gérer -->
+
+				<div id='comment'>
+
+					<?php $nbcomments = $author_id ->gettotalComments($post["id"]); ?>
+
+					<p>Comments [ <?= $nbcomments; ?> ]</p>
+					
+				</div>
+
+
+				<!-- si admin possibilitée de supprimer delPost ou modifier UpdatePost le post -->
+
+				<?php if(isset($_SESSION["ISADMIN"]) && ($_SESSION["ISADMIN"])==1):?>
+
+				
+						<p><a onclick="return confirm('etes vous sur ?')" href="delpost.php?id=<?= $post["id"]?>">Effacer le billet</a>
+						<a href="#">Modifier le billet</a></p>
+
+					
+				<?php endif;?>
 
 			</article>
 

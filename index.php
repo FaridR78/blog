@@ -11,12 +11,32 @@ Pagination (possibilité de voir les 5 articles suivant sur l’url monsite.com/
 
 	include 'autoload.php';
 
+	if(isset($_GET['page']))
+	{
+		
+		$page = $_GET["page"] ;
+
+	}
+	else
+	{
+
+		$page = 1;
+
+	}
+
+
+	$nbpost_page = 5;
+
+	$offset = ($page-1)*$nbpost_page;
+
 	$posted = new Model_Post();
 
-	$posts = $posted ->getLatestPosts(5);
+	$posts = $posted ->getLatestPosts($offset,$nbpost_page);
+
+	$total_post = $posted ->totalPost();
+
+	$nbpage = ceil($total_post/$nbpost_page);
 
 
-	
-	// var_dump($posts);
 
 	include "template.phtml";
