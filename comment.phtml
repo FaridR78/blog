@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<!-- <link href="normalize.css"  rel="stylesheet" media="all" type="text/css"> -->
+	<link href="styles.css" rel="stylesheet" media="all" type="text/css"> 
+	<title>Commentaires</title>
+	
+	<!--
+
+	<style>
+	p.serif {
+	    font-family: "Times New Roman", Times, serif;
+	}
+
+	p.sansserif {
+	    font-family: Arial, Helvetica, sans-serif;
+	}
+	</style>
+
+	-->
+
+</head>
+
+<header>
+
+
+</header>
+
+<body>
+	
+<h1>ajouter un commentaire</h1>
+
+<div class="box_comment">		
+
+	<form name="newcomment" method="post" action="addComment.php">
+
+		<fieldset>
+				
+		<p>
+		<label for="Content">Content</label>
+		<textarea name="content" rows="10" cols="40" id="content_com" value="content">commentaire </textarea>
+		<p>
+
+
+		<p>
+		<input type="hidden" name="id" value='<?= $post["id"];?>'>
+		<input type="submit" name="connexion" value="ajouter un commentaire">
+		</p>
+
+		</fieldset>
+
+	</form>
+</div>

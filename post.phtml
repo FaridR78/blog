@@ -12,7 +12,7 @@
 
 
 <header>
-<h1>Another PHP Blog </h1>
+<h1><a href ="/blog/">Another PHP Blog </a></h1>
 </header>
 
 <div class="main" class="clearfix">
@@ -20,16 +20,32 @@
 		<section class="content">
 			
 			<article>
-			<?php $author_id = new Model_Post(); ?>
+			<?php $post_manager = new Model_Post(); ?>
 
 				<p class="billet">billet numéro : <?= $post["id"]?>  crée le <?= $post["date_create"] ?> 
 
-					<?php $author = $author_id ->getAuthor($post["author_id"]); ?>
+					<?php $author = $post_manager ->getAuthor($post["author_id"]); ?>
 
 					Posted by : <?= $author['firstname'].' '.$author['lastname'] ?></p>
 
 					
 				<p class="title">Titre: <a href ="post.php?id=<?= $post["id"]?>" class="titre"><?=$post["title"]?></a></p>
+
+				<!-- Test si photo ajouté à un billet -->
+
+						<?php if($post["photo"]):?>
+
+							<div>
+								
+							<center><img src=images/<?= $post["photo"] ?> width="500" height="500"></center>
+
+							</div>
+
+											
+						<?php endif;?>
+
+
+
 
 				<div id='content'>
 						<p><?= $post["content"] ?></p>
@@ -39,9 +55,10 @@
 
 				<div id='comment'>
 
-					<?php $nbcomments = $author_id ->gettotalComments($post["id"]); ?>
+					<?php $nbcomments = $post_manager ->gettotalComments($post["id"]); ?>
 
-					<p>Comments [ <?= $nbcomments; ?> ]</p>
+					<!-- <p>Comments [ <?= $nbcomments; ?> ]</p> -->
+					<p>Comments [<a href ="post.php?id=<?= $post["id"]?>#display_comments"> <?= $nbcomments; ?></a> ]</p>
 					
 				</div>
 
@@ -59,44 +76,89 @@
 
 			</article>
 
+				<!-- si connecté possibilitée d'ajouter un comment -->
+
+				<?php if(isset($_SESSION["ID"])):?>
+
+						<?php include "comment.phtml"; ?>
+
+				
+				<?php else:?>
+
+				<p>Vous devez etre connecté pour pouvoir publier des commentaires</p>
+
+				<?php endif;?>
+
+
+				<!-- affichage des commentaires -->
+				
+				<div id="display_comments">
+
+						
+						<?php $nbcomments = $post_manager ->getComments($post["id"]); ?>
+
+						<?php foreach ($nbcomments as $comment): ?>
+
+								<?php $author_id = $comment["author_id"];?>
+
+								<?php $author = $post_manager ->getAuthor($author_id); ?>
+
+							<p>commentaire de <?= $author["firstname"].'  '.$author["lastname"]; ?>
+							   publié le <?= $comment["date_comment"];?></p>
+
+							<div id="style_comment">
+								<p><?= $comment["comment"];?><p>
+							</div>
+										
+						<?php endforeach; ?>
+
+
+				</div>
+
+				
 		</section>
 
 		<section class="menu">
 
 			<nav>
-				
-				<h2>Admin aera</h2>
 
 				<?php if(isset($_SESSION["ID"])):?>
 
+				<h4>Members aera</h4>
+
 				<p><a>Welcome </a><strong><?= $_SESSION["NAME"]; ?></strong></p>
+
+				<p><a href="logout.php">Se déconnecter</a></p>
+
 
 					<?php if(($_SESSION["ISADMIN"])==1):?>
 
-						<p><a href="admin.php">Ajouter une page</a></p>
+						<div class="box_admin">
+								<h2>Admin aera</h2>
+
+								<p><a href="admin.php">Ajouter un article</a></p>
+						</div>
 					
 					<?php endif;?>
-				
 
-					<p><a href="logout.php">Se deconnecter</a></p>
+					
 
 				<?php else:?>
 
 					<p><a href="login.php">Login</a></p>
 
 				<?php endif;?>
-				
+
 
 				<h2>Menu</h2>
 				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Blog</a></li>
+					<li><a href="/blog/">Home</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Contact</a></li>
 				</ul>
-				<h2>Categorie</h2>
-				<h2>Archives</h2>
-				<h2>Search</h2>
+				<h4>Categorie</h4>
+				<h4>Archives</h4>
+				<h4>Search</h4>
 			</nav>
 
 		</section>

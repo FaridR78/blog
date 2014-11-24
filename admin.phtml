@@ -29,26 +29,28 @@
 
 <body>
 	
-<h1>Ajouter un Billet</h1>
+<h1>Ajouter un Article</h1>
 
 <div class="page">		
 
-	<form name="newcontent" method="post" action="addPost.php">
+	<form name="newcontent" method="post" enctype="multipart/form-data" action="addPost.php">
 
 		<fieldset>
-			<legend>Ajouter un article</legend>			
+			<legend>Créer un article</legend>			
 
 			<p>
 				<label for="subject-id">Subject</label>
 				<input type="text" name ="subject" id="subject-id">
 			</p>
 
+			<p>Inclure une photo : <input type="file" name ="picture" id="upload-id"></p>
+
 			<p>
 				<label for="Content">Content</label>
 				<textarea name="content" rows="10" cols="40" id="content" value="content">content</textarea>
 			<P>
 
-<!-- 			<p>
+			<!-- <p>
 				<label for="category">Category</label>
 					<select name="category" >
 							<option value="1">...</option>

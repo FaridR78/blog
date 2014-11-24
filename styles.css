@@ -25,6 +25,8 @@ color: black;
 
 .menu{
 	width: 150px;
+	min-height: 800px;
+	background-color: #E2E2E2;
 	float: left;
 }
 
@@ -50,5 +52,42 @@ li a{
 	width: 650px;
 	background-color: black;
 	color: white;
+
+}
+
+#display_comments {
+
+	background-color: white;
+	width: 650px;
+	color: gray;
+}
+
+#style_comment {
+
+	background-color: gray;
+	color: white;
+	width: 650px;
+}
+
+.box_comment{
+
+	width: 600px;
+
+
+}
+
+#content_com{
+
+	width: 600px;
+}
+
+.box_admin{
+
+	background-color: yellow;
+}
+
+#subject-id{
+
+width: 650px;
 
 }

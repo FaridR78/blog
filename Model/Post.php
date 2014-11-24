@@ -70,15 +70,17 @@ class Model_Post
 	}
 
 	
-	public function createPost($author_id,$cat_id,$content,$title)
+	public function createPost($author_id,$cat_id,$content,$title,$picture)
 	{
 
 		$db = new Helper_Database("config.ini");
 
-		$query = "INSERT INTO post (author_id,cat_id,content,title)
-			      VALUES (?,?,?,?)";
+		$query = "INSERT INTO post (author_id,cat_id,content,title,photo)
+			      VALUES (?,?,?,?,?)";
 
-	    $result =	$db -> execute($query,array($author_id,$cat_id,$content,$title));
+	    $result =	$db -> execute($query,array($author_id,$cat_id,$content,$title,$picture));
+
+
 
 	    return $result;
 
@@ -109,20 +111,7 @@ class Model_Post
 
 	}
 
-	public function postComment($id)
-	{
-
-		$db = new Helper_Database("config.ini");
-
-		$query = "INSERT INTO comment (author_id,comment,id,id_post)
-			      VALUES (?,?,?,?)";
-
-		$result =	$db -> execute($query,array($author_id,$comment,$id,$id_post));
-
-
-
-
-	}
+	
 
 	public function getComments($id)
 	{
@@ -133,7 +122,7 @@ class Model_Post
 
 		$result =	$db -> query($query,array($id));
 
-		//var_dump($result);
+		// var_dump($result);
 		
 		return $result;
 
@@ -152,8 +141,64 @@ class Model_Post
 
 	}
 
+	public function postComment($author_id,$comment,$id_post)
+	{
+
+		$db = new Helper_Database("config.ini");
+
+		$query = "INSERT INTO comment (author_id,comment,id_post)
+			      VALUES (?,?,?)";
+
+		$result =	$db -> execute($query,array($author_id,$comment,$id_post));
+
+	}
 
 
+	public function UpdatePost($id_post,$content,$title,$pic_name,$dir_name,$delpic)
+
+
+	{
+
+
+		$db = new Helper_Database("config.ini");
+
+		if (($pic_name=="") && (!$delpic))
+		{
+
+
+		$query = "UPDATE post SET content=? , title=? , date_update=CURRENT_TIMESTAMP WHERE id =? limit 1";
+		
+	    $result =	$db -> execute($query,array($content,$title,$id_post));
+
+		}
+
+
+		if (strlen($pic_name)!=0)
+		{
+
+		$query = "UPDATE post SET content=? , title=? , photo=? , date_update=CURRENT_TIMESTAMP WHERE id =? limit 1";
+		
+	    $result =	$db -> execute($query,array($content,$title,$pic_name,$id_post));
+
+	    $dir = "images/".$pic_name;
+
+		move_uploaded_file($dir_name, $dir); 
+
+		}
+
+		if ($delpic)
+		{
+
+		$pic_name="";
+		$query = "UPDATE post SET content=? , title=? , photo=? , date_update=CURRENT_TIMESTAMP WHERE id =? limit 1";
+	    $result =	$db -> execute($query,array($content,$title,$pic_name,$id_post));
+
+		}
+
+
+	    return ;
+
+	}
 
 
 }

@@ -11,7 +11,7 @@
 <body>
 
 <header>
-<h1>Another PHP Blog </h1>
+<h1><a href ="/blog/">Another PHP Blog </a></h1>
 </header>
 
 <div class="main" class="clearfix">
@@ -19,18 +19,34 @@
 		<section class="content">
 			
 			<article>
-			<?php $author_id = new Model_Post(); ?>
+			<?php $post_manager = new Model_Post(); ?>
 
 			<?php foreach ($posts as $post): ?>
 
 				<p class="billet">billet numéro : <?= $post["id"]?>  crée le <?= $post["date_create"] ?> 
 
-					<?php $author = $author_id ->getAuthor($post["author_id"]); ?>
+					<?php $author = $post_manager ->getAuthor($post["author_id"]); ?>
 
 					Posted by : <?= $author['firstname'].' '.$author['lastname'] ?></p>
 
 					
 				<p class="title">Titre: <a href ="post.php?id=<?= $post["id"]?>" class="titre"><?=$post["title"]?></a></p>
+
+				<!-- Test si photo ajouté à un billet -->
+
+						<?php if($post["photo"]):?>
+
+							<div>
+								
+							<center><img src=images/<?= $post["photo"] ?> width="250" height="250"></center>
+
+							</div>
+
+											
+						<?php endif;?>
+
+
+				<!-- affichage du contenu du post -->
 
 				<div id='content'>
 					 <p><?= $post["content"] ?> ....</p>
@@ -40,10 +56,12 @@
 
 				<div id='comment'>
 
-					<?php $nbcomments = $author_id ->gettotalComments($post["id"]); ?>
+					<?php $nbcomments = $post_manager ->gettotalComments($post["id"]); ?>
 
-					<p>Comments [ <?= $nbcomments; ?> ]</p>
-					
+
+					<p><a href ="post.php?id=<?= $post["id"]?>">Lire la suite</a> |
+					Commentaires [<a href ="post.php?id=<?= $post["id"]?>#display_comments"> <?= $nbcomments; ?></a> ]</p>
+
 				</div>
 
 
@@ -53,7 +71,7 @@
 
 				
 						<p><a onclick="return confirm('etes vous sur ?')" href="delpost.php?id=<?= $post["id"]?>">Effacer le billet</a>
-						<a href="#">Modifier le billet</a></p>
+						<a href="updatePost.php?id=<?= $post["id"]?>">Modifier le billet</a></p>
 
 					
 				<?php endif;?>
@@ -67,13 +85,13 @@
 
 						<?php if($page>1):?>
 
-							<a href="?page=<?= $page-1;?>">Billets précédent </a>
+							<a href="?page=<?= $page-1;?>">Billets suivant </a>
 						
 						<?php endif;?>
 
 						<?php if($page<$nbpage):?>
 		
-							<a href="?page=<?= $page+1;?>">Billets suivant</a>
+							<a href="?page=<?= $page+1;?>">Billets précédent</a>
 
 						<?php endif;?>
 
@@ -87,20 +105,28 @@
 
 			<nav>
 				
-				<h2>Admin aera</h2>
+				
 
 				<?php if(isset($_SESSION["ID"])):?>
 
+				<h4>Members aera</h4>
+
 				<p><a>Welcome </a><strong><?= $_SESSION["NAME"]; ?></strong></p>
+
+				<p><a href="logout.php">Se déconnecter</a></p>
+
 
 					<?php if(($_SESSION["ISADMIN"])==1):?>
 
-						<p><a href="admin.php">Créer un Billet</a></p>
+						<div class="box_admin">
+								<h2>Admin aera</h2>
+
+								<p><a href="admin.php">Ajouter un article</a></p>
+						</div>
 					
 					<?php endif;?>
-				
 
-					<p><a href="logout.php">Se déconnecter</a></p>
+					
 
 				<?php else:?>
 
@@ -112,8 +138,7 @@
 				<h2>Menu</h2>
 
 				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Blog</a></li>
+					<li><a href="/blog/">Home</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Contact</a></li>
 				</ul>

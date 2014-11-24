@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<!-- <link href="normalize.css"  rel="stylesheet" media="all" type="text/css"> -->
+	<link href="styles.css" rel="stylesheet" media="all" type="text/css"> 
+	<title>Update post</title>
+	
+</head>
+
+<header>
+
+
+</header>
+
+<body>
+	
+<h1>modifier cet article</h1>
+
+<div class="page">		
+
+	<form name="modify_comment" method="post" enctype="multipart/form-data" action="updatePost.php">
+
+		<fieldset>
+		<legend>update</legend>			
+
+		<p>
+			<label for="subject-id">Subject</label>
+			<input type="text" name ="subject" id="subject-id" value='<?= $post["title"];?>'>
+		</p>
+
+		<?php if($post["photo"]):?>
+
+			<div>
+				
+			<center><img src=images/<?= $post["photo"] ?> width="250" height="250"></center>
+
+			</div>
+
+							
+		<?php endif;?>
+
+		<p>modifier photo : <input type="file" name ="picture" id="upload-id" ></p>
+    
+
+        <p><input type="checkbox" name ="delpic">Effacer photo</p>
+		
+
+		<p>
+		<label for="Content">Content</label>
+		<textarea name="content" rows="10" cols="40" id="content"><?= $post["content"];?></textarea>
+		</p>
+
+
+		<input type="hidden" name="id" value='<?= $post["id"];?>'>
+
+		<!-- <p>
+			<label for="category">Category</label>
+				<select name="category" >
+						<option value="1">...</option>
+						<option value="2">New york</option>
+					    <option value="3">Boston</option>
+					    <option value="4">San diego</option>
+					    <option value="5">Washington</option>
+					    <option value="6">Detroit</option>
+					    <option value="7">Chicago</option>
+				</select>
+		</p> -->
+
+		<p>
+			<input type="submit" name="connexion" value="Publier">
+		</p>
+
+		</fieldset>
+
+	</form>
+</div>

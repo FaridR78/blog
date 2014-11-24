@@ -18,6 +18,8 @@ if(!isset($_SESSION["ID"]))
 
 }
 
+
+
 $title = $_POST["subject"];
 
 $content = $_POST["content"];
@@ -26,9 +28,19 @@ $author_id = $_SESSION["ID"];
 
 $cat_id = "0" ; // a revoir
 
+$picture = $_FILES["picture"];
+
+// var_dump($picture);
+
+
 $create = new Model_Post();
 
-$id = $create ->createPost($author_id,$cat_id,$content,$title);
+$id = $create ->createPost($author_id,$cat_id,$content,$title,$picture["name"]);
+
+$dir = "images/".$picture["name"];
+
+move_uploaded_file($picture["tmp_name"], $dir); 
+
 
 header('Location: post.php?id='.$id);
 
