@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <link href="styles.css" rel="stylesheet" media="all" type="text/css">
+
+
     <title>mini blog</title>
     
 </head>
@@ -45,10 +47,34 @@
 						<?php endif;?>
 
 
+				<!-- Affichage du contenu du billet -->
 
 
 				<div id='content'>
 						<p><?= $post["content"] ?></p>
+				</div>
+
+				<!-- affichage des Tags -->
+
+				<div class="tag">
+
+					<?php $tags = $post_manager ->getTags($post["id"]); ?>
+
+
+
+					<?php if(!$tags==""):?>
+
+							<p class="tags">Tags :
+
+								<?php foreach($tags as $tag): ?>
+
+									<?= $tag["tag"];?>
+
+								<?php endforeach; ?>
+							</p>
+					
+					<?php endif;?>
+
 				</div>
 
 				<!-- commentaire à gérer -->
@@ -68,11 +94,13 @@
 				<?php if(isset($_SESSION["ISADMIN"]) && ($_SESSION["ISADMIN"])==1):?>
 
 				
-						<p><a onclick="return confirm('etes vous sur ?')" href="delpost.php?id=<?= $post["id"]?>">Effacer le billet</a>
-						<a href="#">Modifier le billet</a></p>
+				<p><a onclick="return confirm('etes vous sur ?')" href="delpost.php?id=<?= $post["id"]?>">Effacer le billet</a>
+				<a href="updatePost.php?id=<?= $post["id"]?>">Modifier le billet</a></p>
 
 					
 				<?php endif;?>
+
+
 
 			</article>
 
@@ -172,31 +200,21 @@
 
 </footer>
 
-</body>
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//localhost/piwik/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//localhost/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<header>
-
-</header>
-
-
-
-
-
-
-<footer>
-</footer>
 
 </body>

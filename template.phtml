@@ -52,6 +52,27 @@
 					 <p><?= $post["content"] ?> ....</p>
 				</div>
 
+				<!-- affichage des Tags -->
+
+				<div class="tag">
+
+					<?php $tags = $post_manager ->getTags($post["id"]); ?>
+
+					<?php if(!$tags==""):?>
+
+							<p class="tags">Tags :
+
+								<?php foreach($tags as $tag): ?>
+
+									<?= $tag["tag"];?>
+
+								<?php endforeach; ?>
+							</p>
+					
+					<?php endif;?>
+
+				</div>
+
 				<!-- commentaire à gérer -->
 
 				<div id='comment'>
@@ -144,6 +165,19 @@
 				</ul>
 
 				<h2>Categorie</h2>
+
+				<div class="category">
+					
+					<?php $categories = $post_manager ->getCategory(); ?>
+					<?php foreach ($categories as $categorie): ?>
+
+						<?= $categorie["name"].'<br>';?>
+
+					<?php endforeach; ?>
+
+				</div>
+
+
 				<h2>Archives</h2>
 				<h2>Search</h2>
 
@@ -159,5 +193,22 @@
 <footer>
 
 </footer>
+
+
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//localhost/piwik/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//localhost/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
 
 </body>

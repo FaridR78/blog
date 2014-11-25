@@ -10,6 +10,8 @@
 
 include 'autoload.php';
 
+$post_manager = new Model_Post();
+
 if(!isset($_SESSION["ID"]))
 {
 

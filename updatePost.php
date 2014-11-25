@@ -14,6 +14,7 @@
 		$content = $_POST['content'] ;
 		$title   = $_POST['subject'] ;
 		$id_post = $_POST['id'];
+		$tags    = $_POST['tags'];
 		
 		$picture = $_FILES['picture'];
 		
@@ -36,6 +37,12 @@
 
 		$post_manager -> UpdatePost($id_post,$content,$title,$pic_name,$dir_name,$delpic) ;
 
+
+		// maj des tags pour un post //
+
+		$post_manager -> delTags($id_post);
+		$post_manager -> createTags($id_post,$tags);
+
 		header('Location: post.php?id='.$id_post);
 
 		// header('Location: index.php');
@@ -52,9 +59,6 @@
 
 		include 'update.phtml';
 
-
 	}
 
 	
-	
-

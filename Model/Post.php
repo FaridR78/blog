@@ -75,6 +75,7 @@ class Model_Post
 
 		$db = new Helper_Database("config.ini");
 
+
 		$query = "INSERT INTO post (author_id,cat_id,content,title,photo)
 			      VALUES (?,?,?,?,?)";
 
@@ -199,6 +200,81 @@ class Model_Post
 	    return ;
 
 	}
+
+
+	public function getTags($id_post)
+	{
+
+		$db = new Helper_Database("config.ini");
+
+		$query = "SELECT * FROM `tags` WHERE id_post = ?" ;
+
+		$result =	$db -> query($query,array($id_post));
+
+		return $result ;
+	
+	}
+
+
+	public function UpdateTags($id_post,$tags)
+	{
+
+		$db = new Helper_Database("config.ini");
+
+
+
+		$query = "UPDATE tags SET tag=?  WHERE id_post =? limit 1";
+	    $result =	$db -> execute($query,array($tags,$id_post));
+
+	}
+
+	public function createTags($id_post,$tags)
+	{
+
+
+		$db = new Helper_Database("config.ini");
+
+		$tag = explode(",", $tags);
+
+		$nbelem = sizeof($tag);
+
+
+		for ($i=0; $i<$nbelem; $i++) {
+
+			$tabi = $tag[$i];
+
+			echo 'tag '.$tabi.' ajouté '.'<br>' ;
+
+    		$query = "INSERT INTO tags (id_post,tag) VALUES (?,?)";
+
+			$result =	$db -> execute($query,array($id_post,$tabi));
+    				
+		}
+
+		
+
+	}
+
+	public function delTags($id_post)
+	{
+
+		$db = new Helper_Database("config.ini");
+		$query = "DELETE FROM tags WHERE id_post =? ";
+	    $result =	$db -> execute($query,array($id_post));
+
+	}
+
+	public function getCategory()
+	{
+
+		$db = new Helper_Database("config.ini");
+		$query = "SELECT name,id FROM category order by id";
+	    $result =	$db -> query($query);
+		return $result;
+
+	}
+
+
 
 
 }

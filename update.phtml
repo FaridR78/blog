@@ -4,6 +4,9 @@
 	<meta charset="UTF-8">
 	<!-- <link href="normalize.css"  rel="stylesheet" media="all" type="text/css"> -->
 	<link href="styles.css" rel="stylesheet" media="all" type="text/css"> 
+	<script src="http://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+	<script>tinymce.init({selector:'textarea'});</script>
+
 	<title>Update post</title>
 	
 </head>
@@ -67,9 +70,25 @@
 				</select>
 		</p> -->
 
-		<p>
-			<input type="submit" name="connexion" value="Publier">
-		</p>
+		<?php $post_manager = new Model_Post(); ?>
+		<?php $tags = $post_manager ->getTags($post["id"]); ?>
+		
+		<?php $tabi=array();?>
+
+		<?php foreach($tags as $tag): ?>
+
+				<?php $tabi[]=$tag["tag"];?>
+
+
+		<?php endforeach; ?>
+		
+		<?php $tabi=implode(",",$tabi);?>
+
+		<p><input type="text" name ="tags" id="tags-id" value='<?= $tabi;?>'>Tags separate by ,</p>
+		
+			<!-- value='<?= $post["tags"];?>' -->
+
+		<p><input type="submit" name="connexion" value="Publier"></p>
 
 		</fieldset>
 
