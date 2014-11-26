@@ -27,11 +27,21 @@
 
 					<?php $author = $post_manager ->getAuthor($post["author_id"]); ?>
 
-					Posted by : <?= $author['firstname'].' '.$author['lastname'] ?></p>
+					Posted by : <?= $author['firstname'].' '.$author['lastname'] ?>
 
-					
+				
+				<!-- afficher la categorie de l'article -->
+
+				<?php $category = $post_manager ->getName_cat($post["cat_id"]) ; ?>
+
+				<br><a class="category"> Categorie : <a><?= $category ;?></p>
+
+
 				<p class="title">Titre: <a href ="post.php?id=<?= $post["id"]?>" class="titre"><?=$post["title"]?></a></p>
 
+				
+
+				
 				<!-- Test si photo ajouté à un billet -->
 
 						<?php if($post["photo"]):?>
@@ -143,6 +153,8 @@
 								<h2>Admin aera</h2>
 
 								<p><a href="admin.php">Ajouter un article</a></p>
+								<p><a href="#">Gestion des membres</a></p>
+
 						</div>
 					
 					<?php endif;?>
@@ -152,6 +164,8 @@
 				<?php else:?>
 
 					<p><a href="login.php">Login</a></p>
+					<p><a href="register.php">S'inscrire</a>
+
 
 				<?php endif;?>
 				
@@ -166,12 +180,12 @@
 
 				<h2>Categorie</h2>
 
-				<div class="category">
+				<div class="box_category">
 					
 					<?php $categories = $post_manager ->getCategory(); ?>
 					<?php foreach ($categories as $categorie): ?>
 
-						<?= $categorie["name"].'<br>';?>
+						<p><?= $categorie["name"].'<br>';?><p>
 
 					<?php endforeach; ?>
 

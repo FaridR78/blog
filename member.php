@@ -1,18 +1,18 @@
 <?php
 
-session_start();
+
 
 	include 'autoload.php';
 
-	$name=$_POST["name"] ;
+	$email=$_POST["email"] ;
 	$password=$_POST["pass"] ;
 	$pass = md5($password) ;
 
-	echo $pass.'<br>';
+	//echo $pass.'<br>';
 
 	$member = new Model_Member();
 
-	$identify = $member ->verifyUser($name,$pass);
+	$identify = $member ->verifyUser($email,$pass);
 
 /* $identify */
 
@@ -33,6 +33,8 @@ array (size=6)
 		$_SESSION["ID"]=$identify["id"];
 		$_SESSION["NAME"]=$identify["firstname"];
 		$_SESSION["ISADMIN"]=$identify["admin"];
+		$_SESSION["IP"]=$_SERVEUR["REMOTE_ADDR"];
+		
 
 		// if ($identify["admin"])
 		// {

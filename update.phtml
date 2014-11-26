@@ -20,6 +20,8 @@
 	
 <h1>modifier cet article</h1>
 
+<?php $categories = $post_manager ->getCategory(); ?>
+
 <div class="page">		
 
 	<form name="modify_comment" method="post" enctype="multipart/form-data" action="updatePost.php">
@@ -30,7 +32,37 @@
 		<p>
 			<label for="subject-id">Subject</label>
 			<input type="text" name ="subject" id="subject-id" value='<?= $post["title"];?>'>
+
 		</p>
+
+
+
+		<p>
+			<label for="category">Category</label>
+
+				<select name="category">
+
+				<?php foreach ($categories as $key => $value): ?> 
+
+					<?php if($value['id'] == $post['cat_id']): ?>
+					
+						<option selected value="<?= $value['id']; ?>"><?= $value['name']; ?></option>
+
+					<?php else: ?>
+
+						<option value="<?= $value['id']; ?>"><?= $value['name']; ?></option>
+
+					<?php endif;?>
+
+							
+					
+							
+				<?php endforeach; ?>
+
+						
+				</select>
+		</p>
+
 
 		<?php if($post["photo"]):?>
 
@@ -57,19 +89,7 @@
 
 		<input type="hidden" name="id" value='<?= $post["id"];?>'>
 
-		<!-- <p>
-			<label for="category">Category</label>
-				<select name="category" >
-						<option value="1">...</option>
-						<option value="2">New york</option>
-					    <option value="3">Boston</option>
-					    <option value="4">San diego</option>
-					    <option value="5">Washington</option>
-					    <option value="6">Detroit</option>
-					    <option value="7">Chicago</option>
-				</select>
-		</p> -->
-
+		
 		<?php $post_manager = new Model_Post(); ?>
 		<?php $tags = $post_manager ->getTags($post["id"]); ?>
 		

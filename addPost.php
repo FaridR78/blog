@@ -28,7 +28,7 @@ $author_id = $_SESSION["ID"];
 
 $tags = $_POST["tags"];
 
-$cat_id = "0" ; // a revoir
+$cat_id = $_POST["category"]; ; // a revoir
 
 $picture = $_FILES["picture"];
 
@@ -50,5 +50,5 @@ $dir = "images/".$picture["name"];
 move_uploaded_file($picture["tmp_name"], $dir); 
 
 
-//header('Location: post.php?id='.$id);
+header('Location: post.php?id='.$id);
 

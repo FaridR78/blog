@@ -33,7 +33,6 @@ class Model_Post
 
 				$count = 5 ;
 
-
 			}
 
 			if (!is_int($offset))
@@ -41,7 +40,6 @@ class Model_Post
 
 				$offset = 0 ;
 
-			
 			}
 
 			$query ='SELECT *, SUBSTR(content, 1, 500) as content FROM post order by id desc limit '.$offset.', '.$count;
@@ -155,7 +153,7 @@ class Model_Post
 	}
 
 
-	public function UpdatePost($id_post,$content,$title,$pic_name,$dir_name,$delpic)
+	public function UpdatePost($id_post,$content,$title,$pic_name,$dir_name,$delpic,$cat)
 
 
 	{
@@ -167,9 +165,9 @@ class Model_Post
 		{
 
 
-		$query = "UPDATE post SET content=? , title=? , date_update=CURRENT_TIMESTAMP WHERE id =? limit 1";
+		$query = "UPDATE post SET content=? , title=? , cat_id=? , date_update=CURRENT_TIMESTAMP WHERE id =? limit 1";
 		
-	    $result =	$db -> execute($query,array($content,$title,$id_post));
+	    $result =	$db -> execute($query,array($content,$title,$cat,$id_post));
 
 		}
 
@@ -243,9 +241,7 @@ class Model_Post
 
 			$tabi = $tag[$i];
 
-			echo 'tag '.$tabi.' ajouté '.'<br>' ;
-
-    		$query = "INSERT INTO tags (id_post,tag) VALUES (?,?)";
+			$query = "INSERT INTO tags (id_post,tag) VALUES (?,?)";
 
 			$result =	$db -> execute($query,array($id_post,$tabi));
     				
@@ -260,7 +256,7 @@ class Model_Post
 
 		$db = new Helper_Database("config.ini");
 		$query = "DELETE FROM tags WHERE id_post =? ";
-	    $result =	$db -> execute($query,array($id_post));
+	    $result = $db -> execute($query,array($id_post));
 
 	}
 
@@ -274,7 +270,18 @@ class Model_Post
 
 	}
 
+	public function getName_cat($cat_id)
+	{
+
+		$db = new Helper_Database("config.ini");
+		$query = "SELECT name FROM category INNER JOIN post ON post.cat_id = category.id WHERE cat_id = ?";
+	    $result =	$db -> queryOne($query,array($cat_id));
+	    
+		return $result["name"];
+
+	}
 
 
+	
 
 }

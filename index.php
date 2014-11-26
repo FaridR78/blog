@@ -38,5 +38,4 @@ Pagination (possibilité de voir les 5 articles suivant sur l’url monsite.com/
 	$nbpage = ceil($total_post/$nbpost_page);
 
 
-
 	include "template.phtml";

@@ -1,7 +1,6 @@
 body{
 
-background-color: white;
-
+	background-color: #8892BF;
 
 
 }
@@ -17,26 +16,31 @@ color: green;
 
 
 #content{
-width: 650px;
+width: 600px;
 background-color: white;
 color: black;
+
 
 
 }
 
 .menu{
+
+	position: fixed;
 	width: 150px;
-	min-height: 800px;
-	background-color: #E2E2E2;
-	float: left;
+	min-height: 950px;
+	background-color: white;
+	right: 0;
 }
 
 .content{
 
-width: 700px;
-float: left;
+	margin-left: 40px;
+	background-color: white;
+	width: 650px;
 
-
+	float: left;
+	
 }
 
 h2{
@@ -52,7 +56,7 @@ li a{
 
 .billet {
 	width: 650px;
-	background-color: black;
+	background-color: #4F5B93;
 	color: white;
 
 }
@@ -75,7 +79,6 @@ li a{
 
 	width: 600px;
 
-
 }
 
 #content_com{
@@ -91,12 +94,27 @@ li a{
 
 #subject-id{
 
-width: 650px;
+	width: 650px;
 
 }
 
 .tag{
 
-	background-color: orange;
+	background-color: #8892BF;
+	color: white;
 	width: 650px;
+}
+
+.category{
+
+	font-size: 16px;
+	color: orange;
+}
+
+.box_category{
+
+	color: green;
+	text-align: left;
+
+
 }
